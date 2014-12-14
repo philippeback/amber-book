@@ -1,6 +1,8 @@
 Amber Book
 ==========
 
+[![Build Status](https://travis-ci.org/philippeback/amber-book.svg?branch=master)](https://travis-ci.org/philippeback/amber-book)
+
 Clone the repo and then do:
 
 ```shell
