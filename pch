@@ -1,0 +1,34 @@
+#!/bin/bash
+
+PILLARFILES=$(ls -t Book/*.pillar)
+TAGS=()
+entry=1
+for i in $PILLARFILES
+do
+    LABEL=$(echo $i | cut -d'.' -f1)
+    TAGS+=($entry "$LABEL")
+    entry=$(expr $entry + 1)
+done
+echo ${TAGS[*]}
+choice=$(dialog --menu "Pick a chapter to edit" 40 60 25 "${TAGS[@]}" 2>&1 >/dev/tty)
+response=$?
+# echo "Choice: $choice"
+# echo "RESP:$response"
+clear
+
+case $response in
+    
+    0)
+	labelindex=$((($choice-1)*2+1))
+	# echo "Labeldex:$labelindex"
+	LABEL="${TAGS[$labelindex]}"
+	PILLARFILE="${LABEL}.pillar"
+	# echo "Selected $choice -> ${LABEL}"
+	echo "Opening ${PILLARFILE}"
+	gvim ${PILLARFILE}&
+	;;
+    1)
+	echo "Cancelled."
+	;;
+
+esac

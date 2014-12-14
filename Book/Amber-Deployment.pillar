@@ -1,1 +1,19 @@
 !Deploying Applications
+
+Deploying Amber applications can be done by using ==grunt== commands.
+
+In order to deploy the application with all Javascript in a single file, use the ==grunt deploy== command.
+
+This will build the application and all Javascript will end up in a file named ==thejs.js==.
+
+[[[
+$grunt deploy
+]]]
+
+For development, the command is ==grunt devel==.
+
+[[[
+$grunt devel
+]]]
+
+
