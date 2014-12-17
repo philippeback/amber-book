@@ -25,7 +25,7 @@ case $response in
 	PILLARFILE="${LABEL}.pillar"
 	# echo "Selected $choice -> ${LABEL}"
 	echo "Opening ${PILLARFILE}"
-	gvim ${PILLARFILE}&
+	$EDITOR ${PILLARFILE} &
 	;;
     1)
 	echo "Cancelled."
