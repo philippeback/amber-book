@@ -13,7 +13,7 @@ Do do Json calls, one will use ==PlatformInterface== as in *ajaxcall* for GET/PO
   PlatformInterface
     ajax: #{'url'->'foo'. 'otherOption'->'otherValue' ... }
 ]]]
-
+/js
 Lou can specify json type (it is a wrapper around jQuery,ajax), so you can get a decoded raw JS object. 
 Look for ==#readJSObject:== or something similar to convert this raw object to structure of arrays and dictionaries.
 
@@ -39,9 +39,10 @@ From there, one can call any method of the jQuery API. Amber will pass things tr
 
 !!Calling Javascript functions
 
-To call functions like ==aJSObject.someFunction(parm1, parm2, parm3)== one will use a Smalltalk message send as un *jscall1*.
+To call functions like ==aJSObject.someFunction(parm1, parm2, parm3)== one will use a Smalltalk message send as in *jscall1*.
 
-[[[language=Smalltalk|label=jscall1*
+
+[[[language=Smalltalk|label=jscall1
     aJSObject someFunction: parm1 and: parm2 and: parm3.
 ]]]
 
