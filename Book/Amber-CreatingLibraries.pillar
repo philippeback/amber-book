@@ -8,14 +8,14 @@ It it does not cover all of this, I for example cannot imagine where to put a se
 
 OTOH, it can have two parts:
 
-* Part I without any Amber libs and namespace manipulation (just creating a project and using external libraries and getting a hold of .amd.json role and possibilities), and 
-* Part II with everything about composing more amber projects (aka creating / extracting / using Amber libraries).
+- Part I without any Amber libs and namespace manipulation (just creating a project and using external libraries and getting a hold of .amd.json role and possibilities), and 
+- Part II with everything about composing more amber projects (aka creating / extracting / using Amber libraries).
 
 !!How to create an Amber library?
 
 # Run ==amber init== in an empty directory; 
 # identically to creating any Amber project answer the questions to get your project scaffolded; 
-#* be especially concerned about namespace: see “Importance of naming” in “How to use an Amber library” below
+#- be especially concerned about namespace: see “Importance of naming” in “How to use an Amber library” below
 # add config.js and the.js into .gitignore (a library has no need to commit them in VCS)
 # evaluate ==amber serve== or ==amber serve --port <yourPortNumber>==
 # point your browser to that endpoint e.x.: *http://localhost:4000*
