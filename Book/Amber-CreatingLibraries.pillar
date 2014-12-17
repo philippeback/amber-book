@@ -1,0 +1,101 @@
+!Creating and Using Amber Libraries
+
+One of the great things about Amber is that it allows you to use any JavaScript lirary available without much friction.
+
+I would call it “How to make your Amber projects grow and be modular” and cover everything - .amd.json files, namespaces, packages, external libs integration, true Amber libs creation and integration.
+
+It it does not cover all of this, I for example cannot imagine where to put a section of “how to extract a set of packages from an app while changing their namespace and move them to a library” (which is something that people would want; and it can be done painlessly without gruntfile just by using IDE and programmatic setting of the namespace in workspace). 
+
+OTOH, it can have two parts:
+
+* Part I without any Amber libs and namespace manipulation (just creating a project and using external libraries and getting a hold of .amd.json role and possibilities), and 
+* Part II with everything about composing more amber projects (aka creating / extracting / using Amber libraries).
+
+!!How to create an Amber library?
+
+# Run ==amber init== in an empty directory; 
+# identically to creating any Amber project answer the questions to get your project scaffolded; 
+#* be especially concerned about namespace: see “Importance of naming” in “How to use an Amber library” below
+# add config.js and the.js into .gitignore (a library has no need to commit them in VCS)
+# evaluate ==amber serve== or ==amber serve --port <yourPortNumber>==
+# point your browser to that endpoint e.x.: *http://localhost:4000*
+# Start developing your library using Amber as with any other Amber-based app.
+# commit your packages from Helios or Legacy IDE
+# version your project using git `git commit -am "I've made this cool Amber library and this version rocks!"`
+(this seems like a big nonsense to me. This is just a list of how to create a project. Nothing about what makes it a library. No ‘why’, just list of ‘how’s. I’d delete 4,5,7 and just mentioned “version your project with git” in 8. -- herby)
+
+!!How to publish your Amber library?
+
+When you're comfortable with a version to make it available to a wider audience, push your repository to some accessible git repository e.x. github
+
+Choose the version you will publish. It needs to be correct semver version (0.x.y for first stages; x.y.z.with x>=1 for mature stages), e.g. 0.9.2
+
+go to bower.json and make sure you are defining the version number you want to publish. e.g.: 0.9.2 (note: version field in bower.json is a bit strange, as it is a nuisance and not really needed if you publish via git repository, so semver tags define the version. More examination needed here as to select the appropriate policy -- herby)
+
+commit those changes to master (note: does not matter if in master, tag will point to right hash being it in any branch -- herby)
+
+tag your commit with the semver version number you publish, e.g.: 0.9.2 or v0.9.2 (using or omitting ‘v’ is matter of your style)
+
+… and then you register it in bower with: == bower register [lib-name] [git endpoint]==
+
+e.g.:
+
+==bower amber-awesome-lib git@github.com/amberguy/awesome.git==
+
+A couple of tips about publishing in bower:
+
+* The registration is one-time operation. If you registered your library already, you just push and tag fot the new version.
+
+!!About naming your library
+
+@@todo Provide some explanations
+
+!!How to use your Amber library in Amber projects?
+
+You have published your library in bower, great! congratulations!
+Now how do you use it into other Amber projects? It's actually quite easy:
+
+# You bring the library into the directory tree of the project with ==bower==.
+# Configure ==deploy.json== and ==devel.json== so app knows what to load.
+# Ask grunt to prepare the code you need for using it
+# Use it!
+
+Lets see the commands:
+
+# To install the library in your app you do: ==bower install lib-name --save==.
+# Edit ==deploy.js== to setup the list of packages from the library that your app needs, e.g: ==amberlib/AmberLib-View== and ==amberlib/AmberLib-Model== and any other package that your app might be using from the library.
+# Regenerate the infrastucture running: ==grunt devel==.   
+# Reload your app. All the classes from the packages you listed in point 2 now load as expected and are present and accessible in your IDE
+
+""Importance of naming""
+The ==amberlib== namespace in the previous example is exactly same ==amberlib== you define in your library’s ==local.amd.json== in ==paths== section. It is reused as-is by an app. Therefore, think about the namespace of your library well while creating it (changing it is too hard to even mention how to do it). It is this name which you export as a library creator and which app deveopers then must use.
+
+!!Conclusion
+
+That's how you do amber apps that uses amber libs
+Make them easily reachable in the popular bower repo
+Start using them in other amber apps
+
+
+!!Leftovers
+
+Have you done some Amber libs?
+Do you have them already published in bower?
+Which ones?
+We're curious, let us know!
+
+Have questions? want support? get in tou in 
+amber google group 
+gitter
+
+lets try to not distract the reader from the goal ans explain what's strictly needed for getting things working, they will read more(like other articles)  if they want to dig
+
+If we will be too mechanistic about use, they will get buried in black magic, IOW cargo cult. I think they need to _get_ it, so they need not to remember the incantations any more, but just do it because they know what they are doing.
+
+
+I know what you mean, don't worry we can elaborate later if we try to do both things at the same time we have the problem of making them confusing what's important to what's not. And they usually won't have time to understand but want to keep moving (getting it working)
+
+they will _get it_ but in layers and with repetition, not in one shot.
+
+I don’t like the product. It’s a cargo cult flyer. Nothing that really clicks. No mention at all about .amd.json files, while they are at the core of library reusability. It should be longer, with ‘how’ sections interlaced with ‘why’ sections (maybe with different background, so they can be skipped if desired). i think there short outcries do not help. It should be something more solid. -- herby
+

@@ -1,0 +1,50 @@
+!Key Mechanisms
+
+This chapter outlines typical patterns and mechanisms that one does use when writing Amber applications.
+
+It is a kind of smorgasbord of things at this point. Still, it is useful to know these.
+
+!!Talking to JSON APIs
+
+Do do Json calls, one will use ==PlatformInterface== as in *ajaxcall* for GET/POST.
+
+
+[[[language=Smalltalk|label=ajaxcall
+  PlatformInterface
+    ajax: #{'url'->'foo'. 'otherOption'->'otherValue' ... }
+]]]
+
+Lou can specify json type (it is a wrapper around jQuery,ajax), so you can get a decoded raw JS object. 
+Look for ==#readJSObject:== or something similar to convert this raw object to structure of arrays and dictionaries.
+
+@@todo More details on this
+
+!!Using jQuery
+
+@@todo Explain
+
+Basically, one can ask for a jQuery DOM object with ==#asJQuery== as in *asjquery1*.
+
+From there, one can call any method of the jQuery API. Amber will pass things transparently.
+
+
+[[[language=Smalltalk|label=asjquery1
+    | domObject |
+    
+    domObject := #someId asJQuery.
+
+    domObject show.
+    domObject hide.
+]]]
+
+!!Calling Javascript functions
+
+To call functions like ==aJSObject.someFunction(parm1, parm2, parm3)== one will use a Smalltalk message send as un *jscall1*.
+
+[[[language=Smalltalk|label=jscall1*
+    aJSObject someFunction: parm1 and: parm2 and: parm3.
+]]]
+
+What matters that there is a direct mapping of ==someFunction==. For the ==parm2== and ==parm3== one can use whatever names, they are just used to separate parameters. Now, it makes sense to put in names that are intention revealing.
+
+
