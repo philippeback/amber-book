@@ -1,2 +1,30 @@
 !Interfacing with Node
 
+This chapter goes over how one can interface with NodeJS.
+
+!!Basic moves with the REPL
+
+First of all, one can call the Amber REPL (Read Eval Print Loop) to test things.
+
+Start it with:
+
+
+[[[
+    amber repl
+]]]
+
+Some useful keys combos
+|!Combo|!Effect
+|Ctrl-L|clear the screen
+|:q|quits the REPL
+
+!!Doing useful stuff leveraging node.js abilities
+
+One can get a reference to Node facilities through the usual ==require== thing and the invocation of methods on objects as in *nodesample*
+
+[[[label=nodesample
+    fs := require value: 'fs'.
+    fs readdir: '/tmp' do: [:anError :aFileName| console log: aFileName].
+]]]
+
+

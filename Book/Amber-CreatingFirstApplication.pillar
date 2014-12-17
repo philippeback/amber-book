@@ -1,3 +1,30 @@
 !Creating Your First Amber Application
 
+This chapter goes over how to create your first Amber app
+
+First of all, create a place where you application will live:
+
+[[[
+    mkdir myapp
+    cd myapp
+    amber init myapp
+]]]
+
+Answer the various questions so that everything falls in place. As a quick version, just keep on hitting ==ENTER== until the list is over.
+
+
+The start the server.
+
+[[[
+    amber serve
+]]]
+
+You can now point your browser to the application: *http://localhost:4000*
+
+@@note Remove the popup blocker for the IDE to show.
+
+@@todo Add a screenshot of the __Konami Code for the IDE to show__
+
+
+
 

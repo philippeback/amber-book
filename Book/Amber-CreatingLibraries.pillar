@@ -44,7 +44,7 @@ e.g.:
 
 A couple of tips about publishing in bower:
 
-* The registration is one-time operation. If you registered your library already, you just push and tag fot the new version.
+- The registration is one-time operation. If you registered your library already, you just push and tag fot the new version.
 
 !!About naming your library
 

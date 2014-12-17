@@ -1,3 +1,38 @@
 !Using the IDE
 
+This chapter goes over using the IDE to develop with Amber.
+
+!!Use the class browser
+
+- packages
+- instance side
+- class side
+
+!!Using the tools:
+
+Some useful keys and things one must know about:
+
+
+- Ctrl-space
+
+- Use the chevrons for quick access.
+
+- Do not forget to commit the work.
+
+!!Debug code
+
+Put ==self halt== in your code where you want the debugger to show up.
+
+
+!!Using the Workspace
+
+- Print things
+- Inspect things
+- Javascript objects are directly accessible
+-- window
+-- console
+
+!!Using the Test Runner
+
+
 
