@@ -15,23 +15,25 @@ HELP
 }
 
 get_vm() {
-    wget ${CERTCHECK} --output-document - "$VM_INSTALL_URL" | bash
+    curl "$VM_INSTALL_URL" | bash
 }
 
 get_image() {
-    local tempzip="$(mktemp imageXXXXX.zip)"
-    trap "rm '$tempzip'" EXIT
+    local tempzip="/tmp/image$$.zip"
+    local tempzipdir="/tmp/unzipimage$$"
+    trap "rm '$tempzip'; rm -r '$tempzipdir'" EXIT
 
-    wget ${CERTCHECK} --progress=bar:force --output-document="$tempzip" "$IMAGE_URL"
-    for f in $(zipinfo -1 "$tempzip"); do
+    curl -# -o "$tempzip" "$IMAGE_URL"
+    unzip "$tempzip" -d "$tempzipdir"
+    for f in $(ls -1  "$tempzipdir"); do
         ext="${f##*.}"
         file=$(basename $f)
         if [ "$ext" == image -o "$ext" == changes ]; then
             echo "Pharo.$ext"
-            unzip -qp  "$tempzip" "$f" > "Pharo.$ext"
-        elif [ $(basename $f) == "pillar" ]; then
+            cp "$tempzipdir/$f" "Pharo.$ext"
+        elif [ "$file" == "pillar" ]; then
             echo pillar
-            unzip -qp  "$tempzip" "$f" > "pillar"
+            cp "$tempzipdir/$f" "pillar"
             chmod +x pillar
         fi
     done
@@ -43,10 +45,6 @@ prepare_image() {
 
 # stop the script if a single command fails
 set -e
-
-# on mac os wget can be quite old and not recognizing --no-check-certificate
-CERTCHECK="--no-check-certificate"
-wget --help | grep -- "$CERTCHECK" 2>&1 > /dev/null || CERTCHECK=''
 
 should_prepare_image=0
 
